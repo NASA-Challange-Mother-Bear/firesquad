@@ -16,7 +16,7 @@ Markdown==3.0.1
 MarkupSafe==1.0
 numpy==1.15.2
 protobuf==3.6.1
-psycopg2==2.7.5
+psycopg2-binary==2.7.5
 pytz==2018.5
 PyYAML==3.13
 scipy==1.1.0
