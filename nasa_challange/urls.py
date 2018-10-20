@@ -17,8 +17,27 @@ from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework import routers
+
+import alert.urls as alertUrls
+import report.urls as reportUrls
+import user.urls as userUrls
+
+router = routers.DefaultRouter()
+
+routeLists = [
+    alertUrls.routes,
+    reportUrls.routes,
+    userUrls.routes,
+]
+
+for routeList in routeLists:
+    for route in routeList:
+        base_name = None if len(route) <= 2 else route[2]
+        router.register(route[0], route[1], base_name=base_name)
 
 urlpatterns = [
+    path('api/', include(router.urls)),
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls'))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

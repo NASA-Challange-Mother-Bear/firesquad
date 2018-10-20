@@ -1,16 +1,20 @@
 import rest_framework_filters as filters
 from django.contrib.auth.models import User
-from rest_framework_gis.filters import GeoFilterSet
+from django.contrib.gis.db import models
+from django.contrib.postgres.fields import ArrayField
+from rest_framework_gis.filters import GeoFilterSet, GeometryFilter
 
 from alert.models import Alert
+from report.models import Report
 from user.filters import UserFilter
+from utils.filters import ArrayFilter
 
 
-class ReportFilter(filters.FilterSet, GeoFilterSet):
+class ReportFilter(filters.FilterSet):
     user = filters.RelatedFilter(UserFilter, queryset=User.objects.all())
 
     class Meta:
-        model = Alert
+        model = Report
         fields = {
             "photos": "__all__",
             "geolocation": "__all__",
@@ -19,4 +23,13 @@ class ReportFilter(filters.FilterSet, GeoFilterSet):
             "type": "__all__",
             "user": "__all__",
             "alert": "__all__"
+        }
+
+        filter_overrides = {
+            models.PointField: {
+                "filter_class": GeometryFilter
+            },
+            ArrayField: {
+                "filter_class": ArrayFilter(filters.CharFilter)
+            }
         }
