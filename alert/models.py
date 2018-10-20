@@ -7,4 +7,5 @@ from django.utils import timezone
 class Alert(models.Model):
     timestamp = models.DateTimeField(default=timezone.now)
     geolocation = models.PointField(dim=2)
+    active = models.BooleanField(default=True)
 
