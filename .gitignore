@@ -180,3 +180,4 @@ dmypy.json
 
 .idea/
 media/
+*/__pycache__/
