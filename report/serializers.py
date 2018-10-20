@@ -1,4 +1,3 @@
-
 from rest_framework_gis.serializers import GeoFeatureModelSerializer
 
 from report.models import Report

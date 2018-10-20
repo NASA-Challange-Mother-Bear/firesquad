@@ -33,7 +33,7 @@ class Report(models.Model):
     photos = ArrayField(models.ImageField(upload_to=report_location), blank=True)
     geolocation = models.PointField(dim=2)
     timestamp = models.DateTimeField(default=timezone.now)
-    status = models.IntegerField(choices=STATUS_CHOICES)
+    status = models.IntegerField(choices=STATUS_CHOICES, default=0)
     type = models.IntegerField(choices=TYPE_CHOICES)
     user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     alert = models.ForeignKey("alert.Alert", null=True, blank=True, on_delete=models.CASCADE, related_name="alerts")

@@ -1,11 +1,11 @@
-from alert.views import AlertViewSet
-from report.views import ReportViewSet
+from django.urls import path
+
+from report.views import ReportViewSet, report_post
 
 routes = [
     ('report', ReportViewSet, 'report'),
-
 ]
 
-url_patterns = [
-
+urlpatterns = [
+    path("api/report_post/", report_post, "report_post")
 ]
