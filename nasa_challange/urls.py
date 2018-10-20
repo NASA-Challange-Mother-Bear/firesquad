@@ -42,4 +42,5 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
     path('api-token-auth/', obtain_jwt_token),
+    path('',include(userUrls))
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
