@@ -6,5 +6,5 @@ from alert.models import Alert
 class AlertSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = Alert
-        fields = ('timestamp', 'active')
+        fields = ('timestamp', 'active', 'id')
         geo_field = 'geolocation'

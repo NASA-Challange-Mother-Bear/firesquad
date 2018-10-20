@@ -8,4 +8,5 @@ class UserFilter(filters.FilterSet):
         fields = {
             "username": "__all__",
             "email": "__all__",
+            'id': '__all__'
         }

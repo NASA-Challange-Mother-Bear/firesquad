@@ -6,5 +6,5 @@ from report.models import Report
 class ReportSerializer(GeoFeatureModelSerializer):
     class Meta:
         model = Report
-        fields = ('photos', 'timestamp', 'status', 'type', 'user', 'alert')
+        fields = ('photos', 'timestamp', 'status', 'type', 'user', 'alert', 'id')
         geo_field = 'geolocation'

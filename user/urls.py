@@ -1,12 +1,11 @@
-from alert.views import AlertViewSet
-from report.views import ReportViewSet
-from user.views import UserViewSet
+from django.urls import path
+from user.views import UserViewSet, register
 
 routes = [
-    ('user', UserViewSet, 'user'),
+    ('user', UserViewSet, 'user')
 
 ]
 
-url_patterns = [
-
+urlpatterns = [
+    path('api/register/', register, name='register')
 ]
