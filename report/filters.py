@@ -22,7 +22,8 @@ class ReportFilter(filters.FilterSet):
             "status": "__all__",
             "type": "__all__",
             "user": "__all__",
-            "alert": "__all__"
+            "alert": "__all__",
+            'id': '__all__'
         }
 
         filter_overrides = {

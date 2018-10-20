@@ -11,7 +11,8 @@ class AlertFilter(filters.FilterSet):
         fields = {
             "timestamp": "__all__",
             "geolocation": "__all__",
-            "active": "__all__"
+            "active": "__all__",
+            'id': "__all__"
         }
 
         filter_overrides = {
