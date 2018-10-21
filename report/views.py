@@ -11,6 +11,7 @@ from rest_framework.response import Response
 from report.filters import ReportFilter
 from report.models import Report
 from report.serializers import ReportSerializer
+from utils.label_image import classify_image
 
 
 class ReportViewSet(viewsets.ModelViewSet):
@@ -37,5 +38,12 @@ def report_post(request):
     type = post["type"]
     rep = Report(photo=photo, geolocation=geolocation, type=type, user=request.user)
     rep.save()
+
+    if photo:
+        ret = classify_image(rep.photo.file.name)
+
+        rep.status = 1 if ret == "else" or ret == "forest" else 2
+
+        rep.save()
 
     return Response(ReportSerializer(rep).data)
