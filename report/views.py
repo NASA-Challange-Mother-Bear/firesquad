@@ -34,4 +34,5 @@ def report_post(request):
     type = post["type"]
     rep = Report(photos=photos, geolocation=geolocation, type=type, user=request.user)
     rep.save()
+
     return Response(ReportSerializer(rep).data)
