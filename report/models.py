@@ -15,7 +15,7 @@ from django.utils.translation import gettext as _
 def report_location(instance, filename):
     ext = filename.split('.')[-1]
     filename = "%s.%s" % (uuid.uuid4(), ext)
-    return os.path.join(settings.MEDIA_ROOT, "report", filename)
+    return os.path.join("report", filename)
 
 
 class Report(models.Model):

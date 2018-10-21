@@ -41,6 +41,7 @@ def report_post(request):
 
     if photo:
         ret = classify_image(rep.photo.file.name)
+        print(ret)
 
         rep.status = 1 if ret == "else" or ret == "forest" else 2
 

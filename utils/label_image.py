@@ -187,6 +187,7 @@ def classify_image(image_path):
     for i in top_k:
         print(labels[i], results[i])
         if results[i] > max:
+            max = results[i]
             max_i = i
 
     return labels[max_i]
