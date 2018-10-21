@@ -7,5 +7,5 @@ routes = [
 ]
 
 urlpatterns = [
-    path("api/report_post/", report_post, "report_post")
+    path("api/report_post/", report_post, name="report_post")
 ]

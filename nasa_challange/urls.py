@@ -44,5 +44,4 @@ urlpatterns = [
     path('api-token-auth/', obtain_jwt_token),
     path('', include(reportUrls)),
     path('', include(userUrls))
-]
-urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

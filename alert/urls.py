@@ -5,6 +5,6 @@ routes = [
 
 ]
 
-url_patterns = [
+urlpatterns = [
 
 ]
