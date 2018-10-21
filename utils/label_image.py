@@ -158,8 +158,8 @@ def classify_image(image_path):
     label_file = os.path.join(settings.BASE_DIR, "utils", "labels.txt")
     input_layer = "Placeholder"
     output_layer = "final_result"
-
-    graph = load_graph(model_file)
+    if not hasattr(classify_image, "graph"):
+        classify_image.graph = load_graph(model_file)
     t = read_tensor_from_image_file(
         image_path,
         input_height=input_height,
@@ -169,10 +169,10 @@ def classify_image(image_path):
 
     input_name = "import/" + input_layer
     output_name = "import/" + output_layer
-    input_operation = graph.get_operation_by_name(input_name)
-    output_operation = graph.get_operation_by_name(output_name)
+    input_operation = classify_image.graph.get_operation_by_name(input_name)
+    output_operation = classify_image.graph.get_operation_by_name(output_name)
 
-    with tf.Session(graph=graph) as sess:
+    with tf.Session(graph=classify_image.graph) as sess:
         results = sess.run(output_operation.outputs[0], {
             input_operation.outputs[0]: t
         })

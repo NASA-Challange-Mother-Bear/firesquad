@@ -39,12 +39,4 @@ def report_post(request):
     rep = Report(photo=photo, geolocation=geolocation, type=type, user=request.user)
     rep.save()
 
-    if photo:
-        ret = classify_image(rep.photo.file.name)
-        print(ret)
-
-        rep.status = 1 if ret == "else" or ret == "forest" else 2
-
-        rep.save()
-
     return Response(ReportSerializer(rep).data)

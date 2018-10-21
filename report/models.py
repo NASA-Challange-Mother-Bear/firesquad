@@ -10,6 +10,7 @@ from django.utils.translation import gettext as _
 
 
 # Create your models here.
+from utils.label_image import classify_image
 
 
 def report_location(instance, filename):
@@ -37,3 +38,12 @@ class Report(models.Model):
     type = models.IntegerField(choices=TYPE_CHOICES)
     user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     alert = models.ForeignKey("alert.Alert", null=True, blank=True, on_delete=models.CASCADE, related_name="alerts")
+
+    def save(self, **kwargs):
+        super().save(**kwargs)
+
+        if self.photo and self.type == 0:
+            ret = classify_image(self.photo.file.name)
+            self.status = 1 if ret == "else" or ret == "forest" else 2
+
+        super().save(**kwargs)
