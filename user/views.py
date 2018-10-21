@@ -37,10 +37,10 @@ def register(request):
     username = post.get("username", None)
     password = post.get("password", None)
     email = post.get("email", None)
+    print(password)
     if username is None or password is None or email is None:
         return HttpResponseBadRequest()
-    user = User.objects.create_user(username, password)
-    user.email = email
+    user = User.objects.create_user(username, email, password)
     user.save()
     return Response({
         "user": UserSerializer(user, context={

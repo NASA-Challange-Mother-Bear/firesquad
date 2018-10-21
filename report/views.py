@@ -19,7 +19,10 @@ class ReportViewSet(viewsets.ModelViewSet):
     filter_class = ReportFilter
 
 
-def fromDataUrlToFile(data):
+def fromDataUrlToFile(data: str):
+    if data is None:
+        return None
+
     format, imgstr = data.split(';base64,')
     ext = format.split('/')[-1]
 
@@ -29,10 +32,10 @@ def fromDataUrlToFile(data):
 @api_view(["POST"])
 def report_post(request):
     post = request.data
-    photos = [fromDataUrlToFile(v) for v in post.get("images", [])]
+    photo = fromDataUrlToFile(post.get("photo", None))
     geolocation = Point(*post["geolocation"])
     type = post["type"]
-    rep = Report(photos=photos, geolocation=geolocation, type=type, user=request.user)
+    rep = Report(photo=photo, geolocation=geolocation, type=type, user=request.user)
     rep.save()
 
     return Response(ReportSerializer(rep).data)

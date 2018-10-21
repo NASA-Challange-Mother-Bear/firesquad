@@ -30,7 +30,7 @@ class Report(models.Model):
         (1, _("Fire Hazard"))
     )
 
-    photos = ArrayField(models.ImageField(upload_to=report_location), blank=True)
+    photo = models.ImageField(upload_to=report_location, blank=True)
     geolocation = models.PointField(dim=2)
     timestamp = models.DateTimeField(default=timezone.now)
     status = models.IntegerField(choices=STATUS_CHOICES, default=0)
